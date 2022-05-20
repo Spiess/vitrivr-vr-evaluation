@@ -9,7 +9,6 @@ using Vitrivr.UnityInterface.CineastApi.Model.Data;
 using Vitrivr.UnityInterface.CineastApi.Model.Registries;
 using VitrivrVR.Config;
 using VitrivrVR.Notification;
-using VitrivrVR.Submission;
 using VitrivrVR.UI;
 using VitrivrVR.Util;
 
@@ -76,7 +75,6 @@ namespace VitrivrVR.Media.Display
       if (ConfigManager.Config.dresEnabled)
       {
         submitButton.SetActive(true);
-        DresClientManager.LogInteraction("imageSequenceDisplay", $"initialized {_mediaObject.Id} {Segment.Id}");
       }
     }
 
@@ -92,8 +90,6 @@ namespace VitrivrVR.Media.Display
       {
         Destroy(_objectSegmentView);
       }
-
-      DresClientManager.LogInteraction("imageSequenceDisplay", $"closed {_mediaObject.Id} {Segment.Id}");
     }
 
     public async void ToggleMetadata()
@@ -102,7 +98,6 @@ namespace VitrivrVR.Media.Display
       {
         Destroy(_metadataTable);
         _metadataShown = false;
-        DresClientManager.LogInteraction("mediaSegmentMetadata", $"closed {_mediaObject.Id}");
         return;
       }
 
@@ -136,8 +131,6 @@ namespace VitrivrVR.Media.Display
       uiTableController.table = table;
       var uiTableTransform = _metadataTable.GetComponent<RectTransform>();
       uiTableTransform.sizeDelta = new Vector2(100, 600); // x is completely irrelevant here, since width is auto
-
-      DresClientManager.LogInteraction("mediaObjectMetadata", $"opened {_mediaObject.Id}");
     }
 
     public async void ToggleTagList()
@@ -146,7 +139,6 @@ namespace VitrivrVR.Media.Display
       {
         Destroy(_tagList.gameObject);
         _tagListShown = false;
-        DresClientManager.LogInteraction("segmentTags", $"closed {_mediaObject.Id}");
         return;
       }
 
@@ -170,8 +162,6 @@ namespace VitrivrVR.Media.Display
         var tagItem = Instantiate(listItemPrefab, listContent);
         tagItem.GetComponentInChildren<TextMeshProUGUI>().text = tagData.Name;
       }
-
-      DresClientManager.LogInteraction("segmentTags", $"opened {_mediaObject.Id} {Segment.Id}");
     }
 
     public async void ShowObjectSegmentView()
@@ -197,10 +187,7 @@ namespace VitrivrVR.Media.Display
       if (!ConfigManager.Config.dresEnabled)
       {
         NotificationController.Notify("Dres is disabled!");
-        return;
       }
-
-      DresClientManager.SubmitResult(Segment.Id);
     }
 
     private void Awake()

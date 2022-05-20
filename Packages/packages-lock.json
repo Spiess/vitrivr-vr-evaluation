@@ -1,21 +1,5 @@
 {
   "dependencies": {
-    "ch.unibas.vr-multimedia-interfaces": {
-      "version": "https://github.com/Spiess/vr-multimedia-interfaces.git#v0.0.1",
-      "depth": 0,
-      "source": "git",
-      "dependencies": {
-        "com.mapbox.mapbox-sdk": "2.1.1"
-      },
-      "hash": "ec73936cb61a654f53c3931319aa74af784f88c1"
-    },
-    "com.mapbox.mapbox-sdk": {
-      "version": "https://github.com/Spiess/mapbox-upm-sdk.git",
-      "depth": 0,
-      "source": "git",
-      "dependencies": {},
-      "hash": "0ee4d6e34794301023cf283c4b70eba46f4841b1"
-    },
     "com.unity.ext.nunit": {
       "version": "1.0.6",
       "depth": 1,
@@ -147,13 +131,6 @@
       "source": "git",
       "dependencies": {},
       "hash": "3a5d9f1fc552026f01dee50f3ca7e8b9564b1414"
-    },
-    "org.vitrivr.unityinterface.dresapi": {
-      "version": "https://github.com/dres-dev/UnityClient.git#v1.0.0",
-      "depth": 0,
-      "source": "git",
-      "dependencies": {},
-      "hash": "d9cfc9e7502b95572ea1a0a3c3285fc1d45c5091"
     },
     "com.unity.modules.ai": {
       "version": "1.0.0",

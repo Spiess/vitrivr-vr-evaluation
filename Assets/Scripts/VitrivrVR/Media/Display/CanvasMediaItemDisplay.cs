@@ -6,7 +6,6 @@ using UnityEngine.UI;
 using Vitrivr.UnityInterface.CineastApi;
 using Vitrivr.UnityInterface.CineastApi.Model.Data;
 using VitrivrVR.Config;
-using VitrivrVR.Submission;
 using VitrivrVR.Util;
 
 namespace VitrivrVR.Media.Display
@@ -137,10 +136,6 @@ namespace VitrivrVR.Media.Display
 
     private void Submit(InputAction.CallbackContext context)
     {
-      if (!_hovered) return;
-      if (!ConfigManager.Config.dresEnabled) return;
-
-      DresClientManager.QuickSubmitSegment(_segment);
     }
   }
 }

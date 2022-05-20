@@ -7,7 +7,6 @@ using UnityEngine.InputSystem;
 using VitrivrVR.Config;
 using VitrivrVR.Media.Display;
 using VitrivrVR.Notification;
-using VitrivrVR.Submission;
 
 namespace VitrivrVR.Query.Display
 {
@@ -89,11 +88,6 @@ namespace VitrivrVR.Query.Display
       {
         _instantiationQueue.Enqueue(segment);
       }
-
-      if (ConfigManager.Config.dresEnabled)
-      {
-        DresClientManager.LogResults("segment", _results, queryData.query);
-      }
     }
 
     /// <summary>
@@ -132,8 +126,6 @@ namespace VitrivrVR.Query.Display
 
         _currentStart = enabledStart;
         _currentEnd = enabledEnd;
-
-        DresClientManager.LogInteraction("rankedList", $"browse {Mathf.Sign(degrees)}");
       }
     }
 

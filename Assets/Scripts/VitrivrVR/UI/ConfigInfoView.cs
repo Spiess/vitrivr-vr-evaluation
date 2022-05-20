@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using Vitrivr.UnityInterface.CineastApi.Utils;
-using Vitrivr.UnityInterface.DresApi;
 using VitrivrVR.Config;
 
 namespace VitrivrVR.UI
@@ -23,12 +22,6 @@ namespace VitrivrVR.UI
         {"", "Thumbnail Path", CineastConfigManager.Instance.Config.thumbnailPath},
         {"", "Thumbnail Extension", CineastConfigManager.Instance.Config.thumbnailExtension},
         {"", "Media Path", CineastConfigManager.Instance.Config.mediaPath},
-        {"", "", ""},
-        
-        {"Dres", "Host", dresEnabled ? DresConfigManager.Instance.Config.host : disabledMessage},
-        {"", "Port", dresEnabled ? DresConfigManager.Instance.Config.port.ToString() : disabledMessage},
-        {"", "tls", dresEnabled ? DresConfigManager.Instance.Config.tls.ToString() : disabledMessage},
-        {"", "User", dresEnabled ? DresConfigManager.Instance.Config.user : disabledMessage},
         {"", "", ""},
         
         {"vitrivr-VR", "Max Results", ConfigManager.Config.maxResults.ToString()},

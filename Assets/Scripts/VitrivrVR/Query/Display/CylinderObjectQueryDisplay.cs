@@ -8,7 +8,6 @@ using UnityEngine.InputSystem;
 using VitrivrVR.Config;
 using VitrivrVR.Media.Display;
 using VitrivrVR.Notification;
-using VitrivrVR.Submission;
 
 namespace VitrivrVR.Query.Display
 {
@@ -104,11 +103,6 @@ namespace VitrivrVR.Query.Display
       {
         _instantiationQueue.Enqueue(segment);
         _enqueued++;
-      }
-
-      if (ConfigManager.Config.dresEnabled)
-      {
-        DresClientManager.LogResults("object", _results, queryData.query);
       }
     }
 
