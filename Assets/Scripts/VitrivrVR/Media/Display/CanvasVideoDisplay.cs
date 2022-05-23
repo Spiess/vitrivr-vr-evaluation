@@ -48,11 +48,11 @@ namespace VitrivrVR.Media.Display
     public HoverHandler videoHoverHandler;
 
     private ScoredSegment _scoredSegment;
-    private SegmentData _segment;
-    private ObjectData _mediaObject;
+    protected SegmentData _segment;
+    protected ObjectData _mediaObject;
     private List<SegmentData> _segments;
-    private VideoPlayerController _videoPlayerController;
-    private RectTransform _imageTransform;
+    protected VideoPlayerController _videoPlayerController;
+    protected RectTransform _imageTransform;
     private Action _onClose;
     private GameObject _objectSegmentView;
     private bool _metadataShown;
@@ -311,7 +311,7 @@ namespace VitrivrVR.Media.Display
       }
     }
 
-    private void OnClickProgressBar(PointerEventData pointerEventData)
+    protected void OnClickProgressBar(PointerEventData pointerEventData)
     {
       var clickPosition = Quaternion.Inverse(Quaternion.LookRotation(progressBar.forward)) *
                           (pointerEventData.pointerCurrentRaycast.worldPosition - progressBar.position);
@@ -349,7 +349,7 @@ namespace VitrivrVR.Media.Display
       SetVideoTime(segmentStart);
     }
 
-    private async void PrepareCompleted(RenderTexture texture)
+    protected async void PrepareCompleted(RenderTexture texture)
     {
       // Get video dimensions and scale preview image to fit video into 1x1 square
       var width = _videoPlayerController.Width;
@@ -381,7 +381,7 @@ namespace VitrivrVR.Media.Display
     /// </summary>
     /// <param name="segmentStarts">Segment start times in seconds</param>
     /// <returns></returns>
-    private IEnumerator InstantiateSegmentIndicators(IEnumerable<float> segmentStarts)
+    protected IEnumerator InstantiateSegmentIndicators(IEnumerable<float> segmentStarts)
     {
       var progressTexture = new Texture2D(1000, 1);
       var colors = new Color[1000];
@@ -410,13 +410,13 @@ namespace VitrivrVR.Media.Display
       progressTexture.Apply();
     }
 
-    private void ErrorEncountered(VideoPlayer videoPlayer, string error)
+    protected void ErrorEncountered(VideoPlayer videoPlayer, string error)
     {
       Debug.LogError(error);
       previewImage.texture = errorTexture;
     }
 
-    private void UpdateProgressIndicator(double time)
+    protected void UpdateProgressIndicator(double time)
     {
       progressIndicator.anchoredPosition =
         new Vector2((float) (progressBar.rect.width * time / _videoPlayerController.Length), 0);
