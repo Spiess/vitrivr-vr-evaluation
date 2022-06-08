@@ -29,18 +29,12 @@ namespace VitrivrVR.Media.Display
     private MediaDisplay _mediaDisplay;
 
     private HoverHandler _hoverHandler;
-    private bool _hovered;
 
     private void Awake()
     {
       GetComponent<Canvas>().worldCamera = Camera.main;
       var clickHandler = previewImage.gameObject.AddComponent<ClickHandler>();
       clickHandler.onClick = OnClickImage;
-
-      _hoverHandler = GetComponent<HoverHandler>();
-      _hoverHandler.onEnter += OnHoverEnter;
-      _hoverHandler.onExit += OnHoverExit;
-      submitAction.performed += Submit;
     }
 
     private async void Start()
@@ -64,7 +58,6 @@ namespace VitrivrVR.Media.Display
     private void OnDisable()
     {
       submitAction.Disable();
-      _hovered = false;
     }
 
     public override ScoredSegment ScoredSegment => _scoredSegment;
@@ -78,7 +71,7 @@ namespace VitrivrVR.Media.Display
       _scoredSegment = segment;
       _segment = segment.segment;
       var vrConfig = ConfigManager.Config;
-      var score = (float) _scoredSegment.score;
+      var score = (float)_scoredSegment.score;
       // Score frame
       scoreFrame.color = vrConfig.similarityColor.ToColor() * score +
                          vrConfig.dissimilarityColor.ToColor() * (1 - score);
@@ -122,20 +115,6 @@ namespace VitrivrVR.Media.Display
       float factor = Mathf.Max(loadedTexture.width, loadedTexture.height);
       imageFrame.sizeDelta =
         new Vector2(1000 * loadedTexture.width / factor, 1000 * loadedTexture.height / factor);
-    }
-
-    private void OnHoverEnter(PointerEventData pointerEventData)
-    {
-      _hovered = true;
-    }
-
-    private void OnHoverExit(PointerEventData pointerEventData)
-    {
-      _hovered = false;
-    }
-
-    private void Submit(InputAction.CallbackContext context)
-    {
     }
   }
 }

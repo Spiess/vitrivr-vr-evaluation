@@ -16,6 +16,16 @@ PrefabInstance:
         type: 3}
       propertyPath: onClickEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
+      objectReference: {fileID: 9193257563861982129}
+    - target: {fileID: 901190169282689203, guid: 04e47bd7a0ab0475b9b355456cc6f4bf,
+        type: 3}
+      propertyPath: onClickEvent.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnClick
+      objectReference: {fileID: 0}
+    - target: {fileID: 901190169282689203, guid: 04e47bd7a0ab0475b9b355456cc6f4bf,
+        type: 3}
+      propertyPath: onClickEvent.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: VitrivrVR.Media.Display.CanvasVideoDisplay, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 947410348234874420, guid: 04e47bd7a0ab0475b9b355456cc6f4bf,
         type: 3}

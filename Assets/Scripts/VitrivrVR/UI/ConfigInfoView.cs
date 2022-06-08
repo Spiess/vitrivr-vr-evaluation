@@ -13,8 +13,6 @@ namespace VitrivrVR.UI
       GetComponent<Canvas>().worldCamera = Camera.main;
       var uiTable = Instantiate(scrollableUITable, transform);
       var uiTableController = uiTable.GetComponentInChildren<UITableController>();
-      var dresEnabled = ConfigManager.Config.dresEnabled;
-      const string disabledMessage = "Disabled";
       uiTableController.table = new[,]
       {
         {"Cineast", "Host", CineastConfigManager.Instance.Config.cineastHost},

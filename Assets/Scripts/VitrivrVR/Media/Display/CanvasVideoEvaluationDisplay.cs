@@ -39,6 +39,15 @@ namespace VitrivrVR.Media.Display
       return _data;
     }
 
+    /// <summary>
+    /// Returns the current video time in seconds.
+    /// </summary>
+    /// <returns>Video progress time in seconds.</returns>
+    public float GetCurrentTime()
+    {
+      return (float)_videoPlayerController.Time;
+    }
+
     public new void SkipToSegment(int i)
     {
       base.SkipToSegment(i);
