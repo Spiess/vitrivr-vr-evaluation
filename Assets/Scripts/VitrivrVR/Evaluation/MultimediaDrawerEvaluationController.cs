@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Threading.Tasks;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -64,9 +65,17 @@ namespace VitrivrVR.Evaluation
     private readonly List<Action> _revealActions = new();
     private CanvasVideoEvaluationDisplay _currentDisplay;
 
+    private float _taskStartTime;
+
     public void StartEvaluation()
     {
       _config = LoadEvaluationConfig();
+
+      if (File.Exists(_config.outputPath))
+      {
+        Debug.Log($"Output file {_config.outputPath} already exists.");
+        // TODO: Append current time string
+      }
 
       StartTask(0);
 
@@ -118,13 +127,15 @@ namespace VitrivrVR.Evaluation
 
       userSubmitButton.SetActive(true);
 
+      _taskStartTime = Time.time;
+
       _revealActions.Clear();
     }
 
     /// <summary>
     /// Called when the user attempts to submit the current position of the current display.
     /// </summary>
-    public void Submit()
+    public async void Submit()
     {
       var videoProgress = _currentDisplay.GetCurrentTime();
 
@@ -133,8 +144,9 @@ namespace VitrivrVR.Evaluation
       if (videoProgress >= stage.targetStart && videoProgress <= stage.targetEnd)
       {
         // Correct submission
-        // TODO: Log time
-        Debug.Log("Correct submission.");
+        var time = Time.time - _taskStartTime;
+        Debug.Log($"Correct submission after {time} s.");
+        await LogToFile($"{_currentTask}, correct submission in {time}: {videoProgress}");
         userSubmitButton.SetActive(false);
         if (stage.questions.Count > 0)
         {
@@ -148,8 +160,9 @@ namespace VitrivrVR.Evaluation
       else
       {
         // Incorrect submission
-        // TODO: Notify user & log
+        // TODO: Notify user
         Debug.Log($"Incorrect submission: {videoProgress}");
+        await LogToFile($"{_currentTask}, incorrect submission: {videoProgress}");
       }
     }
 
@@ -224,8 +237,16 @@ namespace VitrivrVR.Evaluation
         button.GetComponentInChildren<TMP_Text>().text = i.ToString();
         _currentStageObjects.Add(button.gameObject);
 
-        // TODO: Button action
-        button.onClick.AddListener(NextQuestion);
+        var value = i;
+        var task = _currentTask;
+        async void OnClick()
+        {
+          Debug.Log($"Answered question with: {value}");
+          await LogToFile($"{task}, {questionIndex}: {value}");
+          NextQuestion();
+        }
+
+        button.onClick.AddListener(OnClick);
       }
 
       questionCanvas.gameObject.SetActive(true);
@@ -241,6 +262,12 @@ namespace VitrivrVR.Evaluation
       }
 
       questionCanvas.gameObject.SetActive(false);
+    }
+
+    private async Task LogToFile(string data)
+    {
+      await using var file = new StreamWriter(_config.outputPath, true);
+      await file.WriteLineAsync(data);
     }
   }
 }
