@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 using Vitrivr.UnityInterface.CineastApi.Model.Registries;
 using VitrivrVR.Media.Display;
 
@@ -14,6 +15,8 @@ namespace VitrivrVR.Evaluation
     public Transform videoPosition;
     public GameObject multimediaDrawerPrefab;
     public Transform drawerPosition;
+
+    public Button likertButtonPrefab;
 
     #region Start UI Variables
 
@@ -31,6 +34,16 @@ namespace VitrivrVR.Evaluation
 
     #endregion
 
+    #region Question UI Variables
+
+    public GameObject questionCanvas;
+    public TMP_Text questionText;
+    public TMP_Text minLabel;
+    public TMP_Text maxLabel;
+    public Transform likertButtonHolder;
+
+    #endregion
+
     #region End Variables
 
     public GameObject endMessage;
@@ -41,6 +54,7 @@ namespace VitrivrVR.Evaluation
 
     private EvaluationConfig _config;
     private int _currentTask;
+    private int _currentQuestion;
 
     /// <summary>
     /// All objects used for the current stage, that should be destroyed when moving on.
@@ -76,6 +90,21 @@ namespace VitrivrVR.Evaluation
       StartTask(nextTask);
     }
 
+    private void NextQuestion()
+    {
+      var nextQuestion = _currentQuestion + 1;
+      if (nextQuestion >= _config.stages[_currentTask].questions.Count)
+      {
+        Debug.Log($"Questions complete for stage {_currentTask}.");
+        NextTask();
+        return;
+      }
+
+      _currentQuestion = nextQuestion;
+      StartQuestion(nextQuestion);
+    }
+
+
     /// <summary>
     /// Reveals the current task, if a new task has been loaded.
     /// </summary>
@@ -104,10 +133,17 @@ namespace VitrivrVR.Evaluation
       if (videoProgress >= stage.targetStart && videoProgress <= stage.targetEnd)
       {
         // Correct submission
-        // TODO: Move to questions and log time
+        // TODO: Log time
         Debug.Log("Correct submission.");
         userSubmitButton.SetActive(false);
-        NextTask();
+        if (stage.questions.Count > 0)
+        {
+          StartQuestion(0);
+        }
+        else
+        {
+          NextTask();
+        }
       }
       else
       {
@@ -172,6 +208,29 @@ namespace VitrivrVR.Evaluation
       userRevealButton.SetActive(true);
     }
 
+    private void StartQuestion(int questionIndex)
+    {
+      var question = _config.stages[_currentTask].questions[questionIndex];
+
+      ClearStageObjects();
+
+      questionText.text = question.questionText;
+      minLabel.text = question.minLabel;
+      maxLabel.text = question.maxLabel;
+
+      for (var i = 1; i <= question.max; i++)
+      {
+        var button = Instantiate(likertButtonPrefab, likertButtonHolder);
+        button.GetComponentInChildren<TMP_Text>().text = i.ToString();
+        _currentStageObjects.Add(button.gameObject);
+
+        // TODO: Button action
+        button.onClick.AddListener(NextQuestion);
+      }
+
+      questionCanvas.gameObject.SetActive(true);
+    }
+
     private void ClearStageObjects()
     {
       _revealActions.Clear();
@@ -180,6 +239,8 @@ namespace VitrivrVR.Evaluation
       {
         Destroy(stageObject);
       }
+
+      questionCanvas.gameObject.SetActive(false);
     }
   }
 }
