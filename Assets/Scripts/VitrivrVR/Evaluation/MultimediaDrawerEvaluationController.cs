@@ -11,6 +11,8 @@ namespace VitrivrVR.Evaluation
   {
     public CanvasVideoEvaluationDisplay videoPrefab;
     public Transform videoPosition;
+    public GameObject multimediaDrawerPrefab;
+    public Transform drawerPosition;
 
     #region startUIVariables
 
@@ -29,7 +31,7 @@ namespace VitrivrVR.Evaluation
     private EvaluationConfig _config;
     private int _currentTask;
 
-    private List<GameObject> _currentStageObjects = new();
+    private readonly List<GameObject> _currentStageObjects = new();
 
     public void StartEvaluation()
     {
@@ -66,20 +68,36 @@ namespace VitrivrVR.Evaluation
       return JsonUtility.FromJson<EvaluationConfig>(json);
     }
 
+    private void InstantiateDrawer(CanvasVideoEvaluationDisplay display)
+    {
+      var drawer = Instantiate(multimediaDrawerPrefab, drawerPosition.position, drawerPosition.rotation);
+      _currentStageObjects.Add(drawer);
+      drawer.GetComponentInChildren<MediaObjectSegmentView>()
+        .Initialize(display.GetObjectData(), (i, _) => display.SkipToSegment(i));
+    }
+
     private async void StartTask(int taskIndex)
     {
+      var stage = _config.stages[taskIndex];
+
       // Clear stage objects from the previous stage
       ClearStageObjects();
 
       stageText.text = $"Task {taskIndex}";
-      
+
+      // Instantiate video display
       var videoDisplay = Instantiate(videoPrefab, videoPosition.position, Quaternion.identity);
       _currentStageObjects.Add(videoDisplay.gameObject);
 
-      var videoId = _config.stages[taskIndex].videoId;
-      var objectData = ObjectRegistry.GetObject(videoId);
+      var objectData = ObjectRegistry.GetObject(stage.videoId);
 
       await videoDisplay.Initialize(objectData);
+
+      // Instantiate multimedia drawer view
+      if (stage.multimediaDrawer)
+      {
+        InstantiateDrawer(videoDisplay);
+      }
     }
 
     private void ClearStageObjects()

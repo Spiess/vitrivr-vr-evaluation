@@ -24,6 +24,12 @@ namespace VitrivrVR.Media.Controller
 
     private void OnDownloadSuccess(Texture2D loadedTexture)
     {
+      if (loadedTexture == null)
+      {
+        gameObject.SetActive(false);
+        return;
+      }
+      
       var rend = GetComponent<Renderer>();
       rend.material.mainTexture = loadedTexture;
       float factor = Mathf.Max(loadedTexture.width, loadedTexture.height);

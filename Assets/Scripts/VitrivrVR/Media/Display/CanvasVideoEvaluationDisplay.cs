@@ -34,6 +34,16 @@ namespace VitrivrVR.Media.Display
       progressClickHandler.onClick = OnClickProgressBar;
     }
 
+    public ObjectData GetObjectData()
+    {
+      return _data;
+    }
+
+    public new void SkipToSegment(int i)
+    {
+      base.SkipToSegment(i);
+    }
+
     protected new async void PrepareCompleted(RenderTexture texture)
     {
       // Get video dimensions and scale preview image to fit video into 1x1 square

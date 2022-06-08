@@ -955,6 +955,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1661740048}
+  - {fileID: 412617751}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -973,6 +974,9 @@ MonoBehaviour:
   videoPrefab: {fileID: 9193257563861982129, guid: 1faa1f286851e434491e329d75ce503b,
     type: 3}
   videoPosition: {fileID: 1661740048}
+  multimediaDrawerPrefab: {fileID: 3816833972309262785, guid: abe582c94b4014ac2a4e7e72044b0fe4,
+    type: 3}
+  drawerPosition: {fileID: 412617751}
   configFileInputField: {fileID: 294581284}
   startItemsUI: {fileID: 1245642225}
   stageItemsUI: {fileID: 91882874}
@@ -1009,6 +1013,37 @@ Transform:
   - {fileID: 1833959949}
   m_Father: {fileID: 0}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &412617750
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 412617751}
+  m_Layer: 0
+  m_Name: Drawer Position
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &412617751
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 412617750}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.5, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 335502108}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1058046885
 GameObject:

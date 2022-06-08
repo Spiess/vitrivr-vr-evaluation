@@ -343,7 +343,7 @@ namespace VitrivrVR.Media.Display
       }
     }
 
-    private async void SkipToSegment(int segmentIndex)
+    protected async void SkipToSegment(int segmentIndex)
     {
       var segmentStart = await _segments[segmentIndex].GetAbsoluteStart();
       SetVideoTime(segmentStart);
