@@ -67,9 +67,9 @@ namespace VitrivrVR.Media.Display
       progressBar.gameObject.SetActive(true);
 
       // Instantiate segment indicators
-      var segments = await _data.GetSegments();
+      _segments = await _data.GetSegments();
       var segmentStarts = (await Task.WhenAll(
-          segments.Select(segment => segment.GetAbsoluteStart())))
+          _segments.Select(segment => segment.GetAbsoluteStart())))
         .Where(segStart => segStart != 0);
       StartCoroutine(InstantiateSegmentIndicators(segmentStarts));
     }

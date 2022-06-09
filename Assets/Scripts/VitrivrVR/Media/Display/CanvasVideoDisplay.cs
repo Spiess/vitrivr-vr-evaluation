@@ -50,7 +50,7 @@ namespace VitrivrVR.Media.Display
     private ScoredSegment _scoredSegment;
     protected SegmentData _segment;
     protected ObjectData _mediaObject;
-    private List<SegmentData> _segments;
+    protected List<SegmentData> _segments;
     protected VideoPlayerController _videoPlayerController;
     protected RectTransform _imageTransform;
     private Action _onClose;
@@ -285,7 +285,6 @@ namespace VitrivrVR.Media.Display
       if (!_videoPlayerController.IsPlaying)
       {
         UpdateProgressIndicator(time);
-        UpdateText(time);
       }
     }
 
@@ -295,7 +294,6 @@ namespace VitrivrVR.Media.Display
       {
         var time = _videoPlayerController.ClockTime;
         UpdateProgressIndicator(time);
-        UpdateText(time);
       }
     }
 
@@ -325,7 +323,6 @@ namespace VitrivrVR.Media.Display
       SetVideoTime(newTime);
 
       UpdateProgressIndicator(newTime);
-      UpdateText(newTime);
     }
 
     private void SetVideoTime(double time)

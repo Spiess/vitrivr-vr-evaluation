@@ -262,6 +262,7 @@ namespace VitrivrVR.Evaluation
       }
 
       questionCanvas.gameObject.SetActive(false);
+      userSubmitButton.SetActive(false);
     }
 
     private async Task LogToFile(string data)
