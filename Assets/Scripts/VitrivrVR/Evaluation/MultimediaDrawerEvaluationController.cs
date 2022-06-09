@@ -18,6 +18,7 @@ namespace VitrivrVR.Evaluation
     public Transform drawerPosition;
     public GameObject textTaskPrefab;
     public FrameTaskController frameTaskPrefab;
+    public SequenceTaskController sequenceTaskPrefab;
     public Transform taskHintPosition;
 
     public Button likertButtonPrefab;
@@ -221,8 +222,6 @@ namespace VitrivrVR.Evaluation
         InstantiateDrawer(videoDisplay);
       }
 
-      Debug.Log(stage.frameTask);
-
       // Instantiate task description
       if (stage.textTask != null)
       {
@@ -236,15 +235,15 @@ namespace VitrivrVR.Evaluation
         _currentStageObjects.Add(frameTask.gameObject);
 
         var frame = await videoDisplay.GetFrameAtTime(stage.frameTask);
-        
+
         frameTask.Initialize(frame);
-      }
-      else if (stage.startSequenceTask < stage.endSequenceTask)
-      {
       }
       else
       {
-        Debug.LogError($"No task description provided for stage {_currentTask}!");
+        var sequenceTask = Instantiate(sequenceTaskPrefab, taskHintPosition.position, taskHintPosition.rotation);
+        _currentStageObjects.Add(sequenceTask.gameObject);
+
+        await sequenceTask.Initialize(videoDisplay.GetMediaURL(), stage.targetStart, stage.targetEnd);
       }
 
       userRevealButton.SetActive(true);

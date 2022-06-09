@@ -12,7 +12,8 @@ namespace VitrivrVR.Media.Display
   public class CanvasVideoEvaluationDisplay : CanvasVideoDisplay
   {
     private ObjectData _data;
-    private TaskCompletionSource<object> _isInitialized = new();
+    private readonly TaskCompletionSource<object> _isInitialized = new();
+    private string _mediaUrl;
 
     public async Task Initialize(ObjectData data)
     {
@@ -22,10 +23,10 @@ namespace VitrivrVR.Media.Display
       _imageTransform.sizeDelta = new Vector2(1000, 1000);
 
       // Resolve media URL
-      var mediaUrl = await CineastWrapper.GetMediaUrlOfAsync(data);
+      _mediaUrl = await CineastWrapper.GetMediaUrlOfAsync(data);
 
       _videoPlayerController =
-        new VideoPlayerController(gameObject, mediaUrl, 0, PrepareCompleted, ErrorEncountered);
+        new VideoPlayerController(gameObject, _mediaUrl, 0, PrepareCompleted, ErrorEncountered);
 
       var volume = ConfigManager.Config.defaultMediaVolume;
       SetVolume(volume);
@@ -65,6 +66,11 @@ namespace VitrivrVR.Media.Display
       _videoPlayerController.SetTime(timeBefore);
 
       return frame;
+    }
+
+    public string GetMediaURL()
+    {
+      return _mediaUrl;
     }
 
     protected new async void PrepareCompleted(RenderTexture texture)

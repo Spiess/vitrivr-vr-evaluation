@@ -32,9 +32,6 @@ namespace VitrivrVR.Evaluation
 
     public float frameTask = -1;
 
-    public float startSequenceTask = -1;
-    public float endSequenceTask = -1;
-
     /// <summary>
     /// If the task from this stage includes the multimedia drawer.
     /// </summary>

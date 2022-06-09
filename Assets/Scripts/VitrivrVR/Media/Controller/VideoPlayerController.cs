@@ -37,7 +37,7 @@ namespace VitrivrVR.Media.Controller
 
       _videoPlayer.url = mediaUrl;
       _videoPlayer.frame = startFrame;
-      
+
       _videoPlayer.Prepare();
     }
 
@@ -46,9 +46,15 @@ namespace VitrivrVR.Media.Controller
     public double Length => _videoPlayer.length;
     public long FrameCount => (long) _videoPlayer.frameCount;
     public bool IsPlaying => _videoPlayer.isPlaying;
+    public bool IsPaused => _videoPlayer.isPaused;
     public double Time => _videoPlayer.time;
     public double ClockTime => _videoPlayer.clockTime;
     public long Frame => _videoPlayer.frame;
+
+    public void SetOnSeekComplete(Action<VideoPlayer> seekCompleteAction)
+    {
+      _videoPlayer.seekCompleted += source => seekCompleteAction(source);
+    }
 
     public Texture2D GetCurrentFrame()
     {
