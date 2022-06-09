@@ -16,6 +16,9 @@ namespace VitrivrVR.Evaluation
     public Transform videoPosition;
     public GameObject multimediaDrawerPrefab;
     public Transform drawerPosition;
+    public GameObject textTaskPrefab;
+    public FrameTaskController frameTaskPrefab;
+    public Transform taskHintPosition;
 
     public Button likertButtonPrefab;
 
@@ -170,10 +173,10 @@ namespace VitrivrVR.Evaluation
     {
 #if UNITY_EDITOR
       var folder = Application.dataPath;
-#else
-      var folder = Application.persistentDataPath;
-#endif
       return Path.Combine(folder, configFileName);
+#else
+      return configFileName;
+#endif
     }
 
     private EvaluationConfig LoadEvaluationConfig()
@@ -218,6 +221,32 @@ namespace VitrivrVR.Evaluation
         InstantiateDrawer(videoDisplay);
       }
 
+      Debug.Log(stage.frameTask);
+
+      // Instantiate task description
+      if (stage.textTask != null)
+      {
+        var textTask = Instantiate(textTaskPrefab, taskHintPosition.position, taskHintPosition.rotation);
+        _currentStageObjects.Add(textTask);
+        textTask.GetComponentInChildren<TMP_Text>().text = stage.textTask;
+      }
+      else if (stage.frameTask >= 0)
+      {
+        var frameTask = Instantiate(frameTaskPrefab, taskHintPosition.position, taskHintPosition.rotation);
+        _currentStageObjects.Add(frameTask.gameObject);
+
+        var frame = await videoDisplay.GetFrameAtTime(stage.frameTask);
+        
+        frameTask.Initialize(frame);
+      }
+      else if (stage.startSequenceTask < stage.endSequenceTask)
+      {
+      }
+      else
+      {
+        Debug.LogError($"No task description provided for stage {_currentTask}!");
+      }
+
       userRevealButton.SetActive(true);
     }
 
@@ -239,6 +268,7 @@ namespace VitrivrVR.Evaluation
 
         var value = i;
         var task = _currentTask;
+
         async void OnClick()
         {
           Debug.Log($"Answered question with: {value}");

@@ -624,7 +624,7 @@ RectTransform:
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 335502108}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -799,7 +799,7 @@ RectTransform:
   m_Children:
   - {fileID: 1713438946}
   m_Father: {fileID: 335502108}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1384,6 +1384,7 @@ Transform:
   m_Children:
   - {fileID: 1661740048}
   - {fileID: 412617751}
+  - {fileID: 1621576041}
   - {fileID: 212397241}
   - {fileID: 426132963}
   - {fileID: 235900521}
@@ -1409,6 +1410,11 @@ MonoBehaviour:
   multimediaDrawerPrefab: {fileID: 3816833972309262785, guid: abe582c94b4014ac2a4e7e72044b0fe4,
     type: 3}
   drawerPosition: {fileID: 412617751}
+  textTaskPrefab: {fileID: 2726837948298473376, guid: 2f408feaa8399414dbc4ce6cb021cd43,
+    type: 3}
+  frameTaskPrefab: {fileID: 7461330859446323746, guid: d76f2a5df3003054cbd4b11f5d74c96b,
+    type: 3}
+  taskHintPosition: {fileID: 1621576041}
   likertButtonPrefab: {fileID: 3796602535097952333, guid: 0d3e314e9ab3a4acca8eb8a3f6c33af8,
     type: 3}
   configFileInputField: {fileID: 294581284}
@@ -1656,7 +1662,7 @@ RectTransform:
   m_Children:
   - {fileID: 336716619}
   m_Father: {fileID: 335502108}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1777,7 +1783,7 @@ RectTransform:
   m_Children:
   - {fileID: 1818694551}
   m_Father: {fileID: 335502108}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -3056,6 +3062,37 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 30, y: 45, z: 0}
+--- !u!1 &1621576040
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1621576041}
+  m_Layer: 0
+  m_Name: Task Position
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1621576041
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1621576040}
+  m_LocalRotation: {x: 0, y: 0.5, z: 0, w: 0.8660254}
+  m_LocalPosition: {x: 1.5, y: 1.6, z: 0.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 335502108}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 60, z: 0}
 --- !u!1 &1661740047
 GameObject:
   m_ObjectHideFlags: 0
@@ -3651,6 +3688,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 837197713893991348, guid: 9e86f8938bf545645ac69df2d86083ec,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6317846112504510528, guid: 9e86f8938bf545645ac69df2d86083ec,
         type: 3}
       propertyPath: m_RootOrder

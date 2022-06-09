@@ -12,6 +12,7 @@ namespace VitrivrVR.Media.Display
   public class CanvasVideoEvaluationDisplay : CanvasVideoDisplay
   {
     private ObjectData _data;
+    private TaskCompletionSource<object> _isInitialized = new();
 
     public async Task Initialize(ObjectData data)
     {
@@ -32,6 +33,8 @@ namespace VitrivrVR.Media.Display
 
       var progressClickHandler = progressBar.gameObject.AddComponent<ClickHandler>();
       progressClickHandler.onClick = OnClickProgressBar;
+
+      await _isInitialized.Task;
     }
 
     public ObjectData GetObjectData()
@@ -53,6 +56,17 @@ namespace VitrivrVR.Media.Display
       base.SkipToSegment(i);
     }
 
+    public async Task<Texture2D> GetFrameAtTime(float time)
+    {
+      var timeBefore = _videoPlayerController.Time;
+      _videoPlayerController.SetTime(time);
+      await Task.Delay(100);
+      var frame = _videoPlayerController.GetCurrentFrame();
+      _videoPlayerController.SetTime(timeBefore);
+
+      return frame;
+    }
+
     protected new async void PrepareCompleted(RenderTexture texture)
     {
       // Get video dimensions and scale preview image to fit video into 1x1 square
@@ -72,6 +86,7 @@ namespace VitrivrVR.Media.Display
           _segments.Select(segment => segment.GetAbsoluteStart())))
         .Where(segStart => segStart != 0);
       StartCoroutine(InstantiateSegmentIndicators(segmentStarts));
+      _isInitialized.SetResult(null);
     }
   }
 }
