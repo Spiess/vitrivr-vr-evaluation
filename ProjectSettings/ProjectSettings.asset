@@ -12,8 +12,8 @@ PlayerSettings:
   targetDevice: 2
   useOnDemandResources: 0
   accelerometerFrequency: 60
-  companyName: DefaultCompany
-  productName: vitrivr-vr
+  companyName: vitrivr
+  productName: Multimedia Drawer Evaluation Tool
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
   m_SplashScreenBackgroundColor: {r: 0.13725491, g: 0.12156863, b: 0.1254902, a: 1}
@@ -142,6 +142,9 @@ PlayerSettings:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   - {fileID: -2178208162592412457, guid: c71786fec89583d4997d0c042b3230fd, type: 2}
   - {fileID: 0}
   - {fileID: -2181202381065189684, guid: b2ba65eea7bc840469a9be3eb2a91c4d, type: 2}
@@ -164,7 +167,7 @@ PlayerSettings:
   androidSupportedAspectRatio: 1
   androidMaxAspectRatio: 2.1
   applicationIdentifier:
-    Standalone: com.DefaultCompany.vitrivr-vr
+    Standalone: com.vitrivr.Multimedia-Drawer-Evaluation-Tool
   buildNumber:
     Standalone: 0
     iPhone: 0

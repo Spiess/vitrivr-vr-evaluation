@@ -56,6 +56,11 @@ namespace VitrivrVR.Media.Controller
       _videoPlayer.seekCompleted += source => seekCompleteAction(source);
     }
 
+    public VideoPlayer GetVideoPlayer()
+    {
+      return _videoPlayer;
+    }
+
     public Texture2D GetCurrentFrame()
     {
       var texture = _videoPlayer.targetTexture;

@@ -170,6 +170,11 @@ namespace VitrivrVR.Evaluation
       }
     }
 
+    public void Quit()
+    {
+      Application.Quit();
+    }
+
     private static string GetConfigFilePath(string configFileName)
     {
 #if UNITY_EDITOR

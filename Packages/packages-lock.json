@@ -126,11 +126,11 @@
       "hash": "b5c2335720146358ae35a3ca25807140da33713d"
     },
     "org.vitrivr.unityinterface.cineastapi": {
-      "version": "https://github.com/vitrivr/CineastUnityInterface.git#v0.0.3",
+      "version": "https://github.com/vitrivr/CineastUnityInterface.git",
       "depth": 0,
       "source": "git",
       "dependencies": {},
-      "hash": "3a5d9f1fc552026f01dee50f3ca7e8b9564b1414"
+      "hash": "bafdeb619ab02ca33e07899cfd2349d1829c6c88"
     },
     "com.unity.modules.ai": {
       "version": "1.0.0",

@@ -10,7 +10,7 @@
     "com.unity.xr.management": "4.2.1",
     "com.unity.xr.openxr": "1.4.2",
     "deepspeech": "https://github.com/Spiess/deep-speech-upm.git",
-    "org.vitrivr.unityinterface.cineastapi": "https://github.com/vitrivr/CineastUnityInterface.git#v0.0.3",
+    "org.vitrivr.unityinterface.cineastapi": "https://github.com/vitrivr/CineastUnityInterface.git",
     "com.unity.modules.ai": "1.0.0",
     "com.unity.modules.androidjni": "1.0.0",
     "com.unity.modules.animation": "1.0.0",

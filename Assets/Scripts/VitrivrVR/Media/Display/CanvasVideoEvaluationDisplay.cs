@@ -1,6 +1,8 @@
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.Video;
 using Vitrivr.UnityInterface.CineastApi;
 using Vitrivr.UnityInterface.CineastApi.Model.Data;
 using VitrivrVR.Config;
@@ -60,8 +62,19 @@ namespace VitrivrVR.Media.Display
     public async Task<Texture2D> GetFrameAtTime(float time)
     {
       var timeBefore = _videoPlayerController.Time;
+      var vp = _videoPlayerController.GetVideoPlayer();
+
+      var tcs = new TaskCompletionSource<object>();
+
+      void SeekCompleted(VideoPlayer _)
+      {
+        tcs.SetResult(null);
+      }
+      vp.seekCompleted += SeekCompleted;
       _videoPlayerController.SetTime(time);
-      await Task.Delay(100);
+      await tcs.Task;
+      vp.seekCompleted -= SeekCompleted;
+      await Task.Delay(200);
       var frame = _videoPlayerController.GetCurrentFrame();
       _videoPlayerController.SetTime(timeBefore);
 
