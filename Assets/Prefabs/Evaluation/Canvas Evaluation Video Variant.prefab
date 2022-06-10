@@ -364,55 +364,7 @@ MonoBehaviour:
     m_Id: 6a989481-a537-46c6-8f39-50edc87d76b5
     m_Processors: 
     m_Interactions: 
-    m_SingletonActionBindings:
-    - m_Name: 
-      m_Id: cfe90fa6-b08a-4e10-a5f5-9baa2df17dde
-      m_Path: <XRController>/primary2DAxis
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Skip
-      m_Flags: 0
-    - m_Name: Keyboard
-      m_Id: 8e7de31e-81bb-494a-8272-31675c86fefb
-      m_Path: 2DVector
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Skip
-      m_Flags: 4
-    - m_Name: up
-      m_Id: 00c30e25-b58f-4268-9626-9786194ae981
-      m_Path: 
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Skip
-      m_Flags: 8
-    - m_Name: down
-      m_Id: df0b9d03-2980-4e7a-befa-1e9767913a10
-      m_Path: 
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Skip
-      m_Flags: 8
-    - m_Name: left
-      m_Id: ec58ef21-1603-47a4-895b-66360235152d
-      m_Path: <Keyboard>/downArrow
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Skip
-      m_Flags: 8
-    - m_Name: right
-      m_Id: c5a6063b-bbf2-4c46-9853-1e4636cbf974
-      m_Path: <Keyboard>/upArrow
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Skip
-      m_Flags: 8
+    m_SingletonActionBindings: []
     m_Flags: 0
   videoHoverHandler: {fileID: 2858196509244979979}
 --- !u!114 &4089731575912161536 stripped

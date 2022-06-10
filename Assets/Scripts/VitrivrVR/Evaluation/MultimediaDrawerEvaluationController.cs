@@ -296,6 +296,7 @@ namespace VitrivrVR.Evaluation
       }
 
       questionCanvas.gameObject.SetActive(false);
+      userRevealButton.SetActive(false);
       userSubmitButton.SetActive(false);
     }
 
