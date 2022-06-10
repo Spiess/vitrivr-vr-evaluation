@@ -149,6 +149,10 @@ namespace VitrivrVR.Evaluation
       {
         // Correct submission
         var time = Time.time - _taskStartTime;
+        var button = userSubmitButton.GetComponentInChildren<Button>();
+        var buttonColors = button.colors;
+        buttonColors.selectedColor = Color.green;
+        button.colors = buttonColors;
         Debug.Log($"Correct submission after {time} s.");
         await LogToFile($"{_currentTask}, correct submission in {time}: {videoProgress}");
         userSubmitButton.SetActive(false);
@@ -164,7 +168,10 @@ namespace VitrivrVR.Evaluation
       else
       {
         // Incorrect submission
-        // TODO: Notify user
+        var button = userSubmitButton.GetComponentInChildren<Button>();
+        var buttonColors = button.colors;
+        buttonColors.selectedColor = new Color(1, 0.3f, 0.3f);
+        button.colors = buttonColors;
         Debug.Log($"Incorrect submission: {videoProgress}");
         await LogToFile($"{_currentTask}, incorrect submission: {videoProgress}");
       }
