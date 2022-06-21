@@ -135,6 +135,7 @@ GameObject:
   - component: {fileID: 55096829}
   - component: {fileID: 55096828}
   - component: {fileID: 55096827}
+  - component: {fileID: 55096830}
   m_Layer: 5
   m_Name: Quit Button
   m_TagString: Untagged
@@ -258,6 +259,51 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 55096825}
   m_CullTransparentMesh: 1
+--- !u!114 &55096830
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 55096825}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb6524b7ba4941359d6bba585f20fa71, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  action:
+    m_Name: Action
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 77768ca6-dbdd-4fcc-a5f4-68b1c41ee72f
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: fb97149e-c8fa-45a7-af9d-2c6ae920988c
+      m_Path: <Keyboard>/escape
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Action
+      m_Flags: 0
+    m_Flags: 0
+  effect:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 335502109}
+        m_TargetAssemblyTypeName: VitrivrVR.Evaluation.MultimediaDrawerEvaluationController,
+          Assembly-CSharp
+        m_MethodName: Quit
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &74182658
 GameObject:
   m_ObjectHideFlags: 0
@@ -605,6 +651,7 @@ GameObject:
   - component: {fileID: 200149531}
   - component: {fileID: 200149530}
   - component: {fileID: 200149529}
+  - component: {fileID: 200149532}
   m_Layer: 5
   m_Name: Button
   m_TagString: Untagged
@@ -728,6 +775,51 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 200149527}
   m_CullTransparentMesh: 1
+--- !u!114 &200149532
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 200149527}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb6524b7ba4941359d6bba585f20fa71, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  action:
+    m_Name: Action
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: e49cbccf-448d-4642-baac-6e45bd7fda6c
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: 83811467-32c1-45de-8e6f-6b0316ed1cfe
+      m_Path: <Keyboard>/enter
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Action
+      m_Flags: 0
+    m_Flags: 0
+  effect:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 335502109}
+        m_TargetAssemblyTypeName: VitrivrVR.Evaluation.MultimediaDrawerEvaluationController,
+          Assembly-CSharp
+        m_MethodName: StartEvaluation
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &212397240
 GameObject:
   m_ObjectHideFlags: 0
@@ -1284,10 +1376,36 @@ MonoBehaviour:
       m_Calls: []
   m_OnSelect:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 335502109}
+        m_TargetAssemblyTypeName: VitrivrVR.Evaluation.MultimediaDrawerEvaluationController,
+          Assembly-CSharp
+        m_MethodName: DisableConfigFileInputFieldSelect
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_OnDeselect:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 335502109}
+        m_TargetAssemblyTypeName: VitrivrVR.Evaluation.MultimediaDrawerEvaluationController,
+          Assembly-CSharp
+        m_MethodName: EnableConfigFileInputFieldSelect
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_OnTextSelection:
     m_PersistentCalls:
       m_Calls: []
@@ -1556,6 +1674,23 @@ MonoBehaviour:
     type: 3}
   configFileInputField: {fileID: 294581284}
   startItemsUI: {fileID: 1245642225}
+  selectConfigInputFieldAction:
+    m_Name: Select Config Input Field
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: dc667751-2825-4f3b-9fc1-6ca0e9535365
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: e63dbf6f-222e-4a5c-ad3b-68149d23b24d
+      m_Path: <Keyboard>/anyKey
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Select Config Input Field
+      m_Flags: 0
+    m_Flags: 0
   stageItemsUI: {fileID: 91882874}
   stageText: {fileID: 1769420417}
   userRevealButton: {fileID: 426132962}
@@ -3830,6 +3965,7 @@ GameObject:
   - component: {fileID: 1913926994}
   - component: {fileID: 1913926993}
   - component: {fileID: 1913926992}
+  - component: {fileID: 1913926995}
   m_Layer: 5
   m_Name: Next Button
   m_TagString: Untagged
@@ -3953,6 +4089,51 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1913926990}
   m_CullTransparentMesh: 1
+--- !u!114 &1913926995
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1913926990}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb6524b7ba4941359d6bba585f20fa71, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  action:
+    m_Name: Action
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 8bab83bc-ea7c-49c3-86cc-eb0a4c32a4a8
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: d3c1f7a5-3280-447e-b065-9992475921b1
+      m_Path: <Keyboard>/s
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Action
+      m_Flags: 0
+    m_Flags: 0
+  effect:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 335502109}
+        m_TargetAssemblyTypeName: VitrivrVR.Evaluation.MultimediaDrawerEvaluationController,
+          Assembly-CSharp
+        m_MethodName: NextTask
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &2000330390
 GameObject:
   m_ObjectHideFlags: 0

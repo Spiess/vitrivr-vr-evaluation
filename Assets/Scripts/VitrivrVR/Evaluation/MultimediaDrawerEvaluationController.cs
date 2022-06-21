@@ -4,6 +4,7 @@ using System.IO;
 using System.Threading.Tasks;
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using Vitrivr.UnityInterface.CineastApi.Model.Registries;
 using VitrivrVR.Media.Display;
@@ -27,6 +28,7 @@ namespace VitrivrVR.Evaluation
 
     public TMP_InputField configFileInputField;
     public GameObject startItemsUI;
+    public InputAction selectConfigInputFieldAction;
 
     #endregion
 
@@ -101,6 +103,12 @@ namespace VitrivrVR.Evaluation
 
       _currentTask = nextTask;
       StartTask(nextTask);
+    }
+
+    private void Start()
+    {
+      selectConfigInputFieldAction.Enable();
+      selectConfigInputFieldAction.performed += SelectConfigFileInputField;
     }
 
     private void NextQuestion()
@@ -198,6 +206,21 @@ namespace VitrivrVR.Evaluation
       var json = streamReader.ReadToEnd();
       streamReader.Close();
       return JsonUtility.FromJson<EvaluationConfig>(json);
+    }
+
+    private void SelectConfigFileInputField(InputAction.CallbackContext callbackContext)
+    {
+      configFileInputField.Select();
+    }
+    
+    public void EnableConfigFileInputFieldSelect()
+    {
+      selectConfigInputFieldAction.Enable();
+    }
+
+    public void DisableConfigFileInputFieldSelect()
+    {
+      selectConfigInputFieldAction.Disable();
     }
 
     private void InstantiateDrawer(CanvasVideoEvaluationDisplay display)
