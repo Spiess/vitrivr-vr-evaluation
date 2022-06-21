@@ -16,7 +16,7 @@ namespace VitrivrVR.Media.Display
     private readonly TaskCompletionSource<object> _isInitialized = new();
     private string _mediaUrl;
 
-    public async Task Initialize(ObjectData data)
+    public async Task Initialize(ObjectData data, bool progressBarNavigation)
     {
       _data = data;
       // Change texture to loading texture and reset scale
@@ -33,8 +33,11 @@ namespace VitrivrVR.Media.Display
       SetVolume(volume);
       volumeSlider.value = volume;
 
-      var progressClickHandler = progressBar.gameObject.AddComponent<ClickHandler>();
-      progressClickHandler.onClick = OnClickProgressBar;
+      if (progressBarNavigation)
+      {
+        var progressClickHandler = progressBar.gameObject.AddComponent<ClickHandler>();
+        progressClickHandler.onClick = OnClickProgressBar;
+      }
 
       await _isInitialized.Task;
     }
@@ -50,7 +53,7 @@ namespace VitrivrVR.Media.Display
     /// <returns>Video progress time in seconds.</returns>
     public float GetCurrentTime()
     {
-      return (float)_videoPlayerController.Time;
+      return (float) _videoPlayerController.Time;
     }
 
     public new void SkipToSegment(int i)
@@ -69,6 +72,7 @@ namespace VitrivrVR.Media.Display
       {
         tcs.SetResult(null);
       }
+
       vp.seekCompleted += SeekCompleted;
       _videoPlayerController.SetTime(time);
       await tcs.Task;

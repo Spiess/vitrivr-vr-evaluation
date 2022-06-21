@@ -225,7 +225,7 @@ namespace VitrivrVR.Evaluation
 
       var objectData = ObjectRegistry.GetObject(stage.videoId);
 
-      await videoDisplay.Initialize(objectData);
+      await videoDisplay.Initialize(objectData, !stage.multimediaDrawer);
       _currentDisplay = videoDisplay;
 
       // Instantiate multimedia drawer view
