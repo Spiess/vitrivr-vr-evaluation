@@ -73,15 +73,27 @@ namespace VitrivrVR.Evaluation
 
     private float _taskStartTime;
 
-    public void StartEvaluation()
+    private const string SubmissionsFile = "submissions.csv";
+    private const string SurveyFile = "survey.csv";
+    private const string SkippedFile = "skipped.csv";
+
+    public async void StartEvaluation()
     {
       _config = LoadEvaluationConfig();
 
-      if (File.Exists(_config.outputPath))
+      if (Directory.Exists(_config.outputPath))
       {
-        Debug.Log($"Output file {_config.outputPath} already exists.");
+        Debug.Log($"Output directory {_config.outputPath} already exists.");
         // TODO: Append current time string
       }
+      else
+      {
+        Directory.CreateDirectory(_config.outputPath);
+      }
+
+      await WriteSubmissionHeaderRow();
+      await WriteSurveyHeaderRow();
+      await WriteSkippedHeaderRow();
 
       StartTask(0);
 
@@ -103,6 +115,13 @@ namespace VitrivrVR.Evaluation
 
       _currentTask = nextTask;
       StartTask(nextTask);
+    }
+
+    public async void SkipToNext()
+    {
+      var time = Time.time - _taskStartTime;
+      await LogSkipped(_currentTask, time);
+      NextTask();
     }
 
     private void Start()
@@ -150,19 +169,19 @@ namespace VitrivrVR.Evaluation
     public async void Submit()
     {
       var videoProgress = _currentDisplay.GetCurrentTime();
+      var time = Time.time - _taskStartTime;
 
       var stage = _config.stages[_currentTask];
 
       if (videoProgress >= stage.targetStart && videoProgress <= stage.targetEnd)
       {
         // Correct submission
-        var time = Time.time - _taskStartTime;
         var button = userSubmitButton.GetComponentInChildren<Button>();
         var buttonColors = button.colors;
         buttonColors.selectedColor = Color.green;
         button.colors = buttonColors;
         Debug.Log($"Correct submission after {time} s.");
-        await LogToFile($"{_currentTask}, correct submission in {time}: {videoProgress}");
+        await LogSubmission(_currentTask, time, videoProgress, true);
         userSubmitButton.SetActive(false);
         if (stage.questions.Count > 0)
         {
@@ -181,7 +200,7 @@ namespace VitrivrVR.Evaluation
         buttonColors.selectedColor = new Color(1, 0.3f, 0.3f);
         button.colors = buttonColors;
         Debug.Log($"Incorrect submission: {videoProgress}");
-        await LogToFile($"{_currentTask}, incorrect submission: {videoProgress}");
+        await LogSubmission(_currentTask, time, videoProgress, false);
       }
     }
 
@@ -212,7 +231,7 @@ namespace VitrivrVR.Evaluation
     {
       configFileInputField.Select();
     }
-    
+
     public void EnableConfigFileInputFieldSelect()
     {
       selectConfigInputFieldAction.Enable();
@@ -306,7 +325,7 @@ namespace VitrivrVR.Evaluation
         async void OnClick()
         {
           Debug.Log($"Answered question with: {value}");
-          await LogToFile($"{task}, {questionIndex}: {value}");
+          await LogSurveyAnswer(task, questionIndex, value);
           NextQuestion();
         }
 
@@ -330,10 +349,40 @@ namespace VitrivrVR.Evaluation
       userSubmitButton.SetActive(false);
     }
 
-    private async Task LogToFile(string data)
+    private async Task WriteSubmissionHeaderRow()
     {
-      await using var file = new StreamWriter(_config.outputPath, true);
-      await file.WriteLineAsync(data);
+      await using var file = new StreamWriter(Path.Join(_config.outputPath, SubmissionsFile), true);
+      await file.WriteLineAsync("Task,Task Time,Video Time,Correct");
+    }
+
+    private async Task LogSubmission(int task, float taskTime, float videoTime, bool correct)
+    {
+      await using var file = new StreamWriter(Path.Join(_config.outputPath, SubmissionsFile), true);
+      await file.WriteLineAsync($"{task},{taskTime},{videoTime},{correct}");
+    }
+
+    private async Task WriteSurveyHeaderRow()
+    {
+      await using var file = new StreamWriter(Path.Join(_config.outputPath, SurveyFile), true);
+      await file.WriteLineAsync("Task,Question,Answer");
+    }
+
+    private async Task LogSurveyAnswer(int task, int question, int answer)
+    {
+      await using var file = new StreamWriter(Path.Join(_config.outputPath, SurveyFile), true);
+      await file.WriteLineAsync($"{task},{question},{answer}");
+    }
+
+    private async Task WriteSkippedHeaderRow()
+    {
+      await using var file = new StreamWriter(Path.Join(_config.outputPath, SkippedFile), true);
+      await file.WriteLineAsync("Task,Time");
+    }
+
+    private async Task LogSkipped(int task, float time)
+    {
+      await using var file = new StreamWriter(Path.Join(_config.outputPath, SkippedFile), true);
+      await file.WriteLineAsync($"{task},{time}");
     }
   }
 }

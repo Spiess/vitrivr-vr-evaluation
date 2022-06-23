@@ -4041,7 +4041,7 @@ MonoBehaviour:
       - m_Target: {fileID: 335502109}
         m_TargetAssemblyTypeName: VitrivrVR.Evaluation.MultimediaDrawerEvaluationController,
           Assembly-CSharp
-        m_MethodName: NextTask
+        m_MethodName: SkipToNext
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4124,7 +4124,7 @@ MonoBehaviour:
       - m_Target: {fileID: 335502109}
         m_TargetAssemblyTypeName: VitrivrVR.Evaluation.MultimediaDrawerEvaluationController,
           Assembly-CSharp
-        m_MethodName: NextTask
+        m_MethodName: SkipToNext
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

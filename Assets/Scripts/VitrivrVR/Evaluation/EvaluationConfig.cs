@@ -43,7 +43,7 @@ namespace VitrivrVR.Evaluation
   public class EvaluationConfig
   {
     /// <summary>
-    /// Path to the file into which to record all result data.
+    /// Path to the directory into which to record all result data.
     /// </summary>
     public string outputPath;
 
