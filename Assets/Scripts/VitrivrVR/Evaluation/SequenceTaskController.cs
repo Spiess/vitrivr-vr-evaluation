@@ -1,6 +1,6 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using UnityEngine.Video;
 using VitrivrVR.Config;
@@ -51,6 +51,18 @@ namespace VitrivrVR.Evaluation
     public void SetVolume(float volume)
     {
       _videoPlayerController.SetVolume(volume);
+    }
+    
+    public void OnClick(PointerEventData pointerEventData)
+    {
+      if (_videoPlayerController.IsPlaying)
+      {
+        _videoPlayerController.Pause();
+      }
+      else
+      {
+        _videoPlayerController.Play();
+      }
     }
 
     private void ErrorEncountered(VideoPlayer videoPlayer, string error)
