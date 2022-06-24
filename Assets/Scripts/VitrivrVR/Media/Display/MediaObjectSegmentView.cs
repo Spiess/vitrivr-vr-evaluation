@@ -61,7 +61,7 @@ namespace VitrivrVR.Media.Display
     private new void Update()
     {
       base.Update();
-      
+
       var t = transform.parent;
       // Scale according to grab handle
       var scale = t.localScale;
@@ -82,7 +82,8 @@ namespace VitrivrVR.Media.Display
       }
     }
 
-    public async void Initialize(ObjectData mediaObject, Action<int, Vector3> onSegmentSelection, int min = 0, int max = -1)
+    public async void Initialize(ObjectData mediaObject, Action<int, Vector3> onSegmentSelection, int min = 0,
+      int max = -1)
     {
       _onSegmentSelection = onSegmentSelection;
       _mediaObject = mediaObject;
@@ -110,7 +111,8 @@ namespace VitrivrVR.Media.Display
     public override void OnInteraction(Transform interactor, bool start)
     {
       if (start) return;
-      var segmentIndex = GetSegmentIndex(interactor) + _minIndex;
+      var rawIndex = GetSegmentIndex(interactor);
+      var segmentIndex = rawIndex + _minIndex - 1;
       _onSegmentSelection(segmentIndex, interactor.position);
     }
 
