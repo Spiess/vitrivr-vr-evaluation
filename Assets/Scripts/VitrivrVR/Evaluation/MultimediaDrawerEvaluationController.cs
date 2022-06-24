@@ -36,6 +36,7 @@ namespace VitrivrVR.Evaluation
 
     public GameObject stageItemsUI;
     public TMP_Text stageText;
+    public TMP_Text stageTimer;
     public GameObject userRevealButton;
     public GameObject userSubmitButton;
 
@@ -71,7 +72,7 @@ namespace VitrivrVR.Evaluation
     private readonly List<Action> _revealActions = new();
     private CanvasVideoEvaluationDisplay _currentDisplay;
 
-    private float _taskStartTime;
+    private float _taskStartTime = -1;
 
     private const string SubmissionsFile = "submissions.csv";
     private const string SurveyFile = "survey.csv";
@@ -83,7 +84,7 @@ namespace VitrivrVR.Evaluation
 
       if (Directory.Exists(_config.outputPath))
       {
-        Debug.Log($"Output directory {_config.outputPath} already exists.");
+        Debug.LogWarning($"Output directory {_config.outputPath} already exists.");
         // TODO: Append current time string
       }
       else
@@ -121,6 +122,7 @@ namespace VitrivrVR.Evaluation
     {
       var time = Time.time - _taskStartTime;
       await LogSkipped(_currentTask, time);
+      _taskStartTime = -1;
       NextTask();
     }
 
@@ -128,6 +130,19 @@ namespace VitrivrVR.Evaluation
     {
       selectConfigInputFieldAction.Enable();
       selectConfigInputFieldAction.performed += SelectConfigFileInputField;
+    }
+
+    private void Update()
+    {
+      if (_taskStartTime < 0)
+      {
+        stageTimer.text = "0.00 s";
+      }
+      else
+      {
+        var time = Time.time - _taskStartTime;
+        stageTimer.text = $"{(int) time} s";
+      }
     }
 
     private void NextQuestion()
@@ -191,6 +206,8 @@ namespace VitrivrVR.Evaluation
         {
           NextTask();
         }
+
+        _taskStartTime = -1;
       }
       else
       {
